@@ -1,3 +1,4 @@
+import { Button } from '@mui/material'
 import { useCallback, useState } from 'react'
 
 export function Counter() {
@@ -7,5 +8,9 @@ export function Counter() {
     setCount(count => count + 1)
   }, [])
 
-  return <button onClick={handleButtonClick}>{count}</button>
+  return (
+    <Button variant="contained" disableElevation onClick={handleButtonClick}>
+      {count}
+    </Button>
+  )
 }
