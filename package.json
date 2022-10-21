@@ -2,7 +2,6 @@
   "name": "vite-react-typescript-template",
   "description": "Vite React Typescript Template",
   "version": "0.0.1",
-  "type": "module",
   "author": "玲玲子 <zhangyuanyuan828@outlook.com>",
   "private": true,
   "scripts": {
