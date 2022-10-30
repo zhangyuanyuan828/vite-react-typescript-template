@@ -1,0 +1,35 @@
+{
+  "colorMode": {
+    "system": "系统默认",
+    "light": "亮色",
+    "dark": "深色"
+  },
+  "common": {
+    "colorMode": "颜色模式",
+    "language": "语言"
+  },
+  "dialog": {
+    "title": {
+      "message": "消息",
+      "warning": "警告",
+      "tips": "提示"
+    },
+    "action": {
+      "confirm": "确定",
+      "cancel": "取消",
+      "close": "关闭"
+    }
+  },
+  "info": {
+    "content": "这是一段消息"
+  },
+  "confirm": {
+    "content": "确定删除该数据？该操作不可撤销！",
+    "delete": "删除",
+    "deleting": "删除中"
+  },
+  "prompt": {
+    "content": "请输入你的邮箱地址",
+    "error": "邮箱地址错误"
+  }
+}

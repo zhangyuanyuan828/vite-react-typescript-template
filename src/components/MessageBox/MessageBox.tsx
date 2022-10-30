@@ -18,6 +18,7 @@ import {
 } from '@mui/material'
 import { useEffect, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
 
 export interface MessageBoxWithoutInputProps {
   className?: string
@@ -53,6 +54,8 @@ export interface MessageBoxWithoutInputProps {
   showConfirmButton?: boolean
 
   confirmButtonText?: React.ReactNode
+
+  confirmButtonLoadingText?: React.ReactNode
 
   confirmButtonColor?: ButtonProps['color']
 
@@ -113,6 +116,7 @@ export const MessageBox: React.FC<MessageBoxProps> = props => {
     cancelButtonText,
     showConfirmButton,
     confirmButtonText,
+    confirmButtonLoadingText,
     confirmButtonColor,
     showInput,
     onClose,
@@ -120,6 +124,7 @@ export const MessageBox: React.FC<MessageBoxProps> = props => {
     onConfirm
   } = props
   const { inputType, inputValue, inputVariant, inputLabel, inputPlaceholder, validate } = props.showInput ? props : ({} as Record<string, undefined>)
+  const { t } = useTranslation()
 
   useEffect(() => {
     if (open) {
@@ -208,7 +213,7 @@ export const MessageBox: React.FC<MessageBoxProps> = props => {
       className={className}
       style={style}
       onClose={handleDialogClose}>
-      <DialogTitle component="div" sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 1 }}>
+      <DialogTitle component="div" display="flex" alignItems="center" justifyContent="space-between" gap={1}>
         <Box>{title}</Box>
         {showCloseButton ? (
           <IconButton aria-label="关闭" disabled={loading} onClick={handleCloseButtonClick} size="small">
@@ -217,12 +222,7 @@ export const MessageBox: React.FC<MessageBoxProps> = props => {
         ) : null}
       </DialogTitle>
       <DialogContent>
-        <Box
-          sx={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: 1
-          }}>
+        <Box display="flex" alignItems="center" gap={1}>
           {icon || (type && MessageBoxDefaultIcons[type])}
           <DialogContentText component="div">{content}</DialogContentText>
         </Box>
@@ -258,19 +258,19 @@ export const MessageBox: React.FC<MessageBoxProps> = props => {
         <DialogActions sx={{ px: 3, pb: 2 }}>
           {showCancelButton ? (
             <Button size={size} disableElevation disabled={loading} onClick={handleCancelButtonClick}>
-              {cancelButtonText}
+              {cancelButtonText ?? t('dialog.action.cancel')}
             </Button>
           ) : null}
           {showConfirmButton ? (
             <Button
               variant="contained"
               size={size}
-              color={confirmButtonColor || type}
+              color={confirmButtonColor ?? type}
               disabled={loading}
               startIcon={loading ? <CircularProgress color="inherit" size="1em" /> : undefined}
               disableElevation
               onClick={handleConfirmButtonClick}>
-              {confirmButtonText}
+              {loading ? confirmButtonLoadingText ?? confirmButtonText ?? t('dialog.action.confirm') : confirmButtonText ?? t('dialog.action.confirm')}
             </Button>
           ) : null}
         </DialogActions>
@@ -280,14 +280,11 @@ export const MessageBox: React.FC<MessageBoxProps> = props => {
 }
 
 MessageBox.defaultProps = {
-  title: '提示',
   minWidth: 400,
   closeOnClickBackdrop: true,
   closeOnPressEscape: true,
   showCancelButton: true,
-  cancelButtonText: '取消',
   showConfirmButton: true,
-  confirmButtonText: '确定',
   size: 'small',
   inputVariant: 'standard'
 }

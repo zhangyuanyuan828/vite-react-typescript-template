@@ -1,8 +1,10 @@
-import { Box, CssBaseline } from '@mui/material'
+import { CssBaseline } from '@mui/material'
 import { SnackbarProvider } from 'notistack'
 import { lazy, Suspense } from 'react'
-import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom'
+import { I18nextProvider } from 'react-i18next'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { MessageBoxProvider } from './components'
+import { i18n } from './i18n'
 import { ThemeProvider } from './theme'
 
 const Home = lazy(() => import('./views/Home'))
@@ -12,58 +14,32 @@ export function App() {
   return (
     <ThemeProvider>
       <CssBaseline>
-        <MessageBoxProvider>
-          <SnackbarProvider anchorOrigin={{ horizontal: 'center', vertical: 'top' }} maxSnack={5} dense>
-            <BrowserRouter>
-              <Box
-                component="section"
-                sx={{
-                  width: '100vw',
-                  height: '100vh',
-                  display: 'flex',
-                  flexDirection: 'column'
-                }}>
-                <Box
-                  component="header"
-                  sx={{
-                    display: 'flex',
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    gap: 2
-                  }}>
-                  <NavLink to="/">Home</NavLink>
-                  <NavLink to="/about">About</NavLink>
-                </Box>
-                <Box
-                  component="main"
-                  sx={{
-                    flex: 1,
-                    overflow: 'auto'
-                  }}>
-                  <Routes>
-                    <Route
-                      index
-                      element={
-                        <Suspense>
-                          <Home />
-                        </Suspense>
-                      }
-                    />
-                    <Route
-                      path="about"
-                      element={
-                        <Suspense>
-                          <About />
-                        </Suspense>
-                      }
-                    />
-                  </Routes>
-                </Box>
-              </Box>
-            </BrowserRouter>
-          </SnackbarProvider>
-        </MessageBoxProvider>
+        <I18nextProvider i18n={i18n}>
+          <MessageBoxProvider>
+            <SnackbarProvider anchorOrigin={{ horizontal: 'center', vertical: 'top' }} maxSnack={5} dense>
+              <BrowserRouter>
+                <Routes>
+                  <Route
+                    index
+                    element={
+                      <Suspense>
+                        <Home />
+                      </Suspense>
+                    }
+                  />
+                  <Route
+                    path="about"
+                    element={
+                      <Suspense>
+                        <About />
+                      </Suspense>
+                    }
+                  />
+                </Routes>
+              </BrowserRouter>
+            </SnackbarProvider>
+          </MessageBoxProvider>
+        </I18nextProvider>
       </CssBaseline>
     </ThemeProvider>
   )

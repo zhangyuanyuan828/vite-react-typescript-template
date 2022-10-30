@@ -1,0 +1,35 @@
+{
+  "colorMode": {
+    "system": "System",
+    "light": "Light",
+    "dark": "Dark"
+  },
+  "common": {
+    "colorMode": "Color Mode",
+    "language": "Language"
+  },
+  "dialog": {
+    "title": {
+      "message": "Message",
+      "warning": "Warning",
+      "tips": "Tips"
+    },
+    "action": {
+      "confirm": "OK",
+      "cancel": "Cancel",
+      "close": "Close"
+    }
+  },
+  "info": {
+    "content": "This is a message"
+  },
+  "confirm": {
+    "content": "Are you sure to delete this data? This operation cannot be undone!",
+    "delete": "Delete",
+    "deleting": "Deleting"
+  },
+  "prompt": {
+    "content": "Please enter your email address",
+    "error": "Email address error"
+  }
+}
